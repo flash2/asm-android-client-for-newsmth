@@ -285,7 +285,15 @@ public class Vt100TerminalModel {
 	 * Creates the terminal model with the default number of columns and rows,
 	 * and the default buffer size.
 	 */
-	public Vt100TerminalModel() {
+	public Vt100TerminalModel(String useDayTheme) {
+		
+		if(null != useDayTheme) {
+			SgrColor.COLOR_NORMAL = SgrColor.COLOR_NORMAL_DAY;
+			SgrColor.COLOR_BRIGHT = SgrColor.COLOR_BRIGHT_DAY;
+			SgrColor.BACKGROUND_COLOR_BRIGHT = SgrColor.BACKGROUND_COLOR_BRIGHT_DAY;
+			return;
+		}
+		
 		if (aSMApplication.getCurrentApplication().isNightTheme()) {
 			SgrColor.COLOR_NORMAL = SgrColor.COLOR_NORMAL_NIGHT;
 			SgrColor.COLOR_BRIGHT = SgrColor.COLOR_BRIGHT_NIGHT;
@@ -333,6 +341,10 @@ public class Vt100TerminalModel {
 	}	
 	
 	public static void handleContent(String strRawContentOri, TextView textView) {
+		handleContent(strRawContentOri, textView, null);
+	}
+	
+	public static void handleContent(String strRawContentOri, TextView textView, String useDayTheme) {
 		
 		if(null == strRawContentOri) {
 			textView.setText("");
@@ -341,7 +353,7 @@ public class Vt100TerminalModel {
 		
 //		Log.d("tag", "11111111");
 		boolean bHasControl = true;
-        Vt100TerminalModel vt100 = new Vt100TerminalModel();
+        Vt100TerminalModel vt100 = new Vt100TerminalModel(useDayTheme);
         
 		String strRawContentNew = strRawContentOri.replace("\\r[", Str_Control);
         if(strRawContentOri.length() == strRawContentNew.length()) {

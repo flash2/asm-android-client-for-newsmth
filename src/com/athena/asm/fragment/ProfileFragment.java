@@ -142,7 +142,7 @@ public class ProfileFragment extends SherlockFragment implements BaseViewModel.O
             userIpTextView.setText("来自:" + m_currentProfile.getIp());
 
             TextView descTextView = (TextView) m_layout.findViewById(R.id.profile_user_desc);
-    		Vt100TerminalModel.handleContent(m_currentProfile.getDescription(), descTextView);		                        
+    		Vt100TerminalModel.handleContent(m_currentProfile.getDescription(), descTextView, "");		                        
 //            descTextView.setText(Html.fromHtml(m_currentProfile.getDescription()));
 
             TextView aliveTextView = (TextView) m_layout.findViewById(R.id.profile_aliveness);
