@@ -143,9 +143,12 @@ public class Vt100TerminalModel {
             int back = backgroundBold ? SgrColor.BACKGROUND_COLOR_BRIGHT[backgroundColor] : SgrColor.COLOR_NORMAL[backgroundColor];
             int fore = 10 > Math.abs(foregroundColor) ? (foregroundBold ? SgrColor.COLOR_BRIGHT[foregroundColor] : SgrColor.COLOR_NORMAL[foregroundColor])
             		: foregroundColor;
-            if(backgroundColor == foregroundColor && foregroundBold) {
-            	back = SgrColor.COLOR_NORMAL[backgroundColor];
-            }
+            
+			if (backgroundColor == foregroundColor
+					&& foregroundColor == DEFAULT_BACKGROUND_COLOR) {
+				fore = foregroundBold ? SgrColor.COLOR_BRIGHT[DEFAULT_FOREGROUND_COLOR]
+						: SgrColor.COLOR_NORMAL[DEFAULT_FOREGROUND_COLOR];
+			}
             
             int start = nStart - nLen + 1;
             if(0 > start) {
